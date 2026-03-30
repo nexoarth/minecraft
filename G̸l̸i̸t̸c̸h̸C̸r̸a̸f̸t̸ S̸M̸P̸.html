@@ -1,1 +1,625 @@
-hi
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlitchCraft Menu</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+            color: white;
+/* 📱 MOBILE (até 768px) */
+@media (max-width: 768px) {
+
+    .menu {
+        top: 45%;
+        padding: 0 15px;
+    }
+
+    .title img {
+        max-width: 90%;
+    }
+
+    .btn {
+        font-size: 16px;
+        padding: 14px;
+        max-width: 260px;
+    }
+
+    #server-info {
+        font-size: 13px;
+        padding: 15px;
+    }
+
+    .support-btn {
+        top: 10px;
+        left: 10px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .lang {
+        top: 10px;
+        right: 10px;
+        font-size: 22px;
+    }
+}
+
+
+/* 💻 TELAS GRANDES */
+@media (min-width: 1200px) {
+
+    .menu {
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    .btn {
+        max-width: 380px;
+        font-size: 22px;
+    }
+
+    #server-info {
+        max-width: 380px;
+        font-size: 15px;
+    }
+}
+
+
+/* 🪟 JANELAS PEQUENAS (altura baixa) */
+@media (max-height: 600px) {
+
+    .menu {
+        top: 52%;
+        transform: translateY(-50%) scale(0.9);
+    }
+
+    .title img {
+        max-width: 380px;
+    }
+
+    .btn {
+        margin: 8px auto;
+    }
+}
+        }
+
+        /* FUNDO GLITCH */
+        .bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('https://cdn.discordapp.com/attachments/1419389401305317469/1488224902845829342/image.jpg?ex=69cc00f2&is=69caaf72&hm=930ae05b5851f85a1b3f1fd757e1294d572865713622f1783f3d12429a234a50&') center/cover no-repeat;
+            background-attachment: fixed;
+            filter: brightness(0.65) contrast(1.15);
+        }
+
+        .bg::before,
+        .bg::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            mix-blend-mode: screen;
+        }
+
+        .bg::before { 
+            transform: translate(3px, 1px); 
+            filter: hue-rotate(15deg); 
+            opacity: 0.4; 
+            animation: glitch1 1.8s infinite linear alternate; 
+        }
+        .bg::after  { 
+            transform: translate(-3px, -1px); 
+            filter: hue-rotate(195deg); 
+            opacity: 0.35; 
+            animation: glitch2 2.7s infinite linear alternate; 
+        }
+
+        @keyframes glitch1 { 
+            0%{clip-path:inset(0 0 85% 0)} 
+            20%{clip-path:inset(25% 0 55% 0)} 
+            40%{clip-path:inset(45% 0 25% 0)} 
+            60%{clip-path:inset(15% 0 75% 0)} 
+            80%{clip-path:inset(35% 0 40% 0)} 
+            100%{clip-path:inset(0 0 85% 0)} 
+        }
+        @keyframes glitch2 { 
+            0%{clip-path:inset(75% 0 10% 0)} 
+            20%{clip-path:inset(55% 0 30% 0)} 
+            40%{clip-path:inset(35% 0 50% 0)} 
+            60%{clip-path:inset(65% 0 15% 0)} 
+            80%{clip-path:inset(20% 0 65% 0)} 
+            100%{clip-path:inset(75% 0 10% 0)} 
+        }
+
+        /* Overlay escuro */
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        /* Menu central */
+        .menu {
+            position: relative;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            padding: 0 20px;
+        }
+
+        /* LOGO GLITCHCRAFT (sua imagem com efeito glitch) */
+        .title {
+            margin-bottom: 30px;
+        }
+        .title img {
+            width: 100%;
+            max-width: 520px;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 0 25px #00ffff) drop-shadow(0 0 15px #ff00ff);
+            animation: logoGlitch 1.4s infinite linear alternate;
+        }
+        @keyframes logoGlitch {
+            0%   { filter: drop-shadow(4px 4px 0 #000) drop-shadow(-2px -2px 0 #f00) drop-shadow(2px 2px 0 #0ff); }
+            50%  { filter: drop-shadow(-4px -4px 0 #000) drop-shadow(2px 2px 0 #f00) drop-shadow(-2px -2px 0 #0ff); }
+            100% { filter: drop-shadow(4px 4px 0 #000) drop-shadow(-2px -2px 0 #f00) drop-shadow(2px 2px 0 #0ff); }
+        }
+
+        /* Botões principais */
+        .btn {
+            display: block;
+            width: 100%;
+            max-width: 320px;
+            margin: 14px auto;
+            padding: 18px;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            border: 3px solid #000;
+            box-shadow: inset 0 -6px 0 rgba(0,0,0,0.6);
+            color: white;
+            border-radius: 8px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .green { background: #3CB043; }
+        .purple { background: #7b4dff; }
+        .btn:hover { 
+            filter: brightness(1.2); 
+            transform: scale(1.05) translateY(-2px); 
+        }
+        .btn:active { 
+            transform: scale(0.98) translateY(4px); 
+        }
+
+        /* Seção de informações */
+        #server-info {
+            max-width: 320px;
+            margin: 25px auto;
+            background: rgba(0,0,0,0.45);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 14.5px;
+            line-height: 1.5;
+            border: 1px solid rgba(123,77,255,0.3);
+        }
+
+        /* Botão Suporte */
+        .support-btn {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 50px;
+            border: 2px solid #7b4dff;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            z-index: 4;
+            transition: all 0.2s;
+            box-shadow: 0 0 20px #7b4dff;
+        }
+        .support-btn:hover {
+            background: #7b4dff;
+            transform: scale(1.08);
+        }
+
+        /* Idioma */
+        .lang {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 3;
+            filter: drop-shadow(0 0 10px white);
+        }
+
+        /* Modal de Suporte */
+        #support-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #1a1a1a;
+            max-width: 420px;
+            width: 90%;
+            border-radius: 14px;
+            padding: 28px;
+            border: 4px solid #7b4dff;
+            box-shadow: 0 0 40px #7b4dff;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top: 14px;
+            right: 22px;
+            font-size: 32px;
+            cursor: pointer;
+            color: #ff4444;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg"></div>
+    <div class="overlay"></div>
+
+    <!-- Botão Suporte -->
+    <div class="support-btn" onclick="toggleSupport()">
+        🛠️ <span id="support-text">Suporte / Feedback</span>
+    </div>
+
+    <!-- Botão Idioma -->
+    <div class="lang" onclick="toggleLang()">🌐 Language </div>
+
+    <div class="menu">
+        <!-- TÍTULO AGORA É A SUA IMAGEM (já com o link correto) -->
+        <div class="title">
+            <img id="logo-img" 
+                 src="https://cdn.discordapp.com/attachments/1419389401305317469/1488209428107886662/Untitled63_20220427230547.png?ex=69cbf289&is=69caa109&hm=7bcf35ce17bcad2aeac567ec977e97bc1eeca7302a1404c6d943924aa27a74a6&" 
+                 alt="GlitchCraft">
+        </div>
+
+        <a id="mc" href="minecraft:?addExternalServer=GlitchCraft|170.23.125.103:19132" class="btn green">
+            Jogar
+        </a>
+
+        <a id="dc" href="https://discord.gg/Xx5zdu4XTj" class="btn purple" target="_blank">
+            Comunidade
+        </a>
+
+        <p style="color:#3CB043; font-size:19px; margin:10px 0 15px;">IP: <strong>170.23.125.103:19132</strong></p>
+
+        <div id="server-info">
+            <!-- conteúdo preenchido pelo JS -->
+        </div>
+
+        <div id="msg" style="color:white; margin-top:10px; font-style:italic;">
+            Algo está errado com este mundo...
+        </div>
+    </div>
+
+    <!-- MODAL DE SUPORTE -->
+    <div id="support-modal" onclick="if(event.target.id==='support-modal')toggleSupport()">
+        <div class="modal-content" onclick="event.stopImmediatePropagation()">
+            <span class="close-btn" onclick="toggleSupport()">✕</span>
+            <h2 id="modal-title" style="margin-top:0; color:#7b4dff;">Suporte & Feedback</h2>
+            <p id="modal-desc">Precisa de ajuda ou quer dar sugestão?</p>
+            
+            <a href="https://discord.gg/Xx5zdu4XTj" target="_blank" 
+               style="display:block; background:#7b4dff; color:white; text-align:center; padding:14px; border-radius:8px; margin:15px 0; text-decoration:none; font-weight:bold;">
+                Open Discord (Quick Support)
+            </a>
+            
+            <div style="background:rgba(255,255,255,0.08); padding:15px; border-radius:8px; margin:15px 0; font-size:14px;" id="modal-info">
+                Mande seu feedback diretamente para <strong>Amethyst0407</strong> no Discord.<br>
+                Qualquer dúvida, bug ou sugestão de melhoria é bem-vinda!
+            </div>
+            
+            <small style="color:#aaa; display:block; text-align:center;">GlitchCraft SMP • 18+</small>
+        </div>
+    </div>
+
+    <script>
+        let lang = "pt";
+
+        const texts = {
+            en: {
+                mc: "Play",
+                dc: "Community",
+                msg: "Something is wrong with this world...",
+                supportBtn: "Support / Feedback",
+                modalTitle: "Support & Feedback",
+                modalDesc: "Need help or want to give feedback?",
+                modalInfo: `Send your feedback directly to <strong>Amethyst0407</strong> on Discord.<br>Any question, bug or improvement suggestion is welcome!`,
+                serverInfo: `<strong>GlitchCraft SMP - 18+ ONLY</strong><br><br>Bedrock exclusive server.<br>Must be 18 or older (no exceptions).<br><br>No minors — we don't have staff.<br>Prizes &amp; giveaways every week.<br>World never resets — explore abandoned builds!<br>Full rules + whitelist on Discord.<br><br><strong>How to join:</strong><br>1. Join our Discord<br>2. Amethyst0407 will ask your age<br>3. If 18+ → send gamertag → whitelisted<br>4. If minor → kicked<br><br>Be patient with age verification. Thank you!`
+            },
+            pt: {
+                mc: "Jogar",
+                dc: "Comunidade",
+                msg: "Algo está errado com este mundo...",
+                supportBtn: "Suporte / Feedback",
+                modalTitle: "Suporte & Feedback",
+                modalDesc: "Precisa de ajuda ou quer dar sugestão?",
+                modalInfo: `Mande seu feedback diretamente para <strong>Amethyst0407</strong> no Discord.<br>Qualquer dúvida, bug ou sugestão de melhoria é bem-vinda!`,
+                serverInfo: `<strong>GlitchCraft SMP - 18+ SOMENTE</strong><br><br>Servidor exclusivo para Bedrock.<br>Obrigatório ter 18 anos ou mais (sem exceções).<br><br>Não permitimos menores — não temos staff.<br>Prêmios e sorteios toda semana.<br>O mundo nunca reseta — explore construções abandonadas!<br>Regras completas e whitelist no Discord.<br><br><strong>Como entrar:</strong><br>1. Entre no nosso Discord<br>2. Amethyst0407 vai perguntar sua idade<br>3. Se 18+ → mande seu gamertag → whitelist<br>4. Se menor → kickado<br><br>Seja paciente com a verificação de idade. Obrigado!`
+            }
+        };
+
+        function toggleLang() {
+            lang = lang === "en" ? "pt" : "en";
+            const t = texts[lang];
+            
+            document.getElementById("mc").innerText = t.mc;
+            document.getElementById("dc").innerText = t.dc;
+            document.getElementById("msg").innerText = t.msg;
+            document.getElementById("support-text").innerText = t.supportBtn;
+            document.getElementById("modal-title").innerHTML = t.modalTitle;
+            document.getElementById("modal-desc").innerHTML = t.modalDesc;
+            document.getElementById("modal-info").innerHTML = t.modalInfo;
+            document.getElementById("server-info").innerHTML = t.serverInfo;
+        }
+
+        function toggleSupport() {
+            const modal = document.getElementById("support-modal");
+            modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+        }
+
+        /* Inicializa os textos em português (padrão BR) */
+        window.onload = () => {
+            lang = "pt";
+            const t = texts.pt;
+            document.getElementById("mc").innerText = t.mc;
+            document.getElementById("dc").innerText = t.dc;
+            document.getElementById("msg").innerText = t.msg;
+            document.getElementById("support-text").innerText = t.supportBtn;
+            document.getElementById("modal-title").innerHTML = t.modalTitle;
+            document.getElementById("modal-desc").innerHTML = t.modalDesc;
+            document.getElementById("modal-info").innerHTML = t.modalInfo;
+            document.getElementById("server-info").innerHTML = t.serverInfo;
+
+            console.log("%c✅ GlitchCraft Menu atualizado (Glitch Lab removido + logo nova)", "color:#7b4dff; font-size:16px; font-weight:bold");
+        };
+    </script>
+</body>
+</html>        modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+        }
+
+        /* Inicializa os textos em português (padrão BR) */
+        window.onload = () => {
+            lang = "pt";
+            const t = texts.pt;
+            document.getElementById("mc").innerText = t.mc;
+            document.getElementById("dc").innerText = t.dc;
+            document.getElementById("msg").innerText = t.msg;
+            document.getElementById("support-text").innerText = t.supportBtn;
+            document.getElementById("modal-title").innerHTML = t.modalTitle;
+            document.getElementById("modal-desc").innerHTML = t.modalDesc;
+            document.getElementById("modal-info").innerHTML = t.modalInfo;
+            document.getElementById("server-info").innerHTML = t.serverInfo;
+
+            console.log("%c✅ GlitchCraft Menu finalizado com as duas logos!", "color:#7b4dff; font-size:16px; font-weight:bold");
+        };
+    </script>
+<script>
+let lang = "en"; // começa em inglês
+
+const texts = {
+    en: {
+        mc: "Play",
+        dc: "Community",
+        msg: "Something is wrong with this world...",
+        supportBtn: "Support / Feedback",
+        modalTitle: "Support & Feedback",
+        modalDesc: "Need help or want to give feedback?",
+        modalInfo: `Send your feedback directly to <strong>Amethyst0407</strong> on Discord.<br>Any question, bug or improvement suggestion is welcome!`,
+        serverInfo: `<strong>GlitchCraft SMP - 18+ ONLY</strong><br><br>Bedrock exclusive server.<br>Must be 18 or older (no exceptions).<br><br>No minors — we don't have staff.<br>Prizes &amp; giveaways every week.<br>World never resets — explore abandoned builds!<br>Full rules + whitelist on Discord.<br><br><strong>How to join:</strong><br>1. Join our Discord<br>2. Amethyst0407 will ask your age<br>3. If 18+ → send gamertag → whitelisted<br>4. If minor → kicked<br><br>Be patient with age verification. Thank you!`
+    },
+    pt: {
+        mc: "Jogar",
+        dc: "Comunidade",
+        msg: "Algo está errado com este mundo...",
+        supportBtn: "Suporte / Feedback",
+        modalTitle: "Suporte & Feedback",
+        modalDesc: "Precisa de ajuda ou quer dar sugestão?",
+        modalInfo: `Mande seu feedback diretamente para <strong>Amethyst0407</strong> no Discord.<br>Qualquer dúvida, bug ou sugestão de melhoria é bem-vinda!`,
+        serverInfo: `<strong>GlitchCraft SMP - 18+ SOMENTE</strong><br><br>Servidor exclusivo para Bedrock.<br>Obrigatório ter 18 anos ou mais (sem exceções).<br><br>Não permitimos menores — não temos staff.<br>Prêmios e sorteios toda semana.<br>O mundo nunca reseta — explore construções abandonadas!<br>Regras completas e whitelist no Discord.<br><br><strong>Como entrar:</strong><br>1. Entre no nosso Discord<br>2. Amethyst0407 vai perguntar sua idade<br>3. Se 18+ → mande seu gamertag → whitelist<br>4. Se menor → kickado<br><br>Seja paciente com a verificação de idade. Obrigado!`
+    }
+};
+
+/* APLICAR IDIOMA */
+function applyLang() {
+    const t = texts[lang];
+
+    document.getElementById("mc").innerText = t.mc;
+    document.getElementById("dc").innerText = t.dc;
+    document.getElementById("msg").innerText = "";
+    document.getElementById("support-text").innerText = t.supportBtn;
+    document.getElementById("modal-title").innerHTML = t.modalTitle;
+    document.getElementById("modal-desc").innerHTML = t.modalDesc;
+    document.getElementById("modal-info").innerHTML = t.modalInfo;
+    document.getElementById("server-info").innerHTML = t.serverInfo;
+
+    typeEffect(t.msg);
+}
+
+/* TYPEWRITER (mantido) */
+function typeEffect(text) {
+    let i = 0;
+    const el = document.getElementById("msg");
+    el.innerHTML = "";
+
+    function typing() {
+        if (i < text.length) {
+            el.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, 35);
+        }
+    }
+    typing();
+}
+
+/* 🔥 API REAL (sem quebrar layout) */
+async function updateServerStatus() {
+    const status = document.getElementById("server-status");
+    const players = document.getElementById("players");
+
+    try {
+        const res = await fetch("https://api.mcstatus.io/v2/status/bedrock/170.23.125.103:19132");
+        const data = await res.json();
+
+        if (data.online) {
+            status.innerText = "Online";
+            status.style.color = "#3CB043";
+
+            players.innerText = data.players?.online ?? "0";
+        } else {
+            status.innerText = "Offline";
+            status.style.color = "#ff4444";
+            players.innerText = "0";
+        }
+
+    } catch (err) {
+        console.log("API error:", err);
+
+        status.innerText = "Unknown";
+        status.style.color = "#ffaa00";
+    }
+}
+
+/* IDIOMA */
+function toggleLang() {
+    lang = lang === "en" ? "pt" : "en";
+    applyLang();
+}
+
+/* MODAL */
+function toggleSupport() {
+    const modal = document.getElementById("support-modal");
+    modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+}
+
+/* INIT */
+window.onload = () => {
+    applyLang(); // começa em inglês automaticamente
+
+    updateServerStatus();
+    setInterval(updateServerStatus, 30000);
+
+    console.log("%c🌐 Language GlitchCraft conectado ao servidor real", "color:#7b4dff; font-size:16px;");
+};
+</script>
+let lang = "en";
+
+const texts = {
+    en: {
+        mc: "Play",
+        dc: "Community",
+        msg: "Something is wrong with this world...",
+        supportBtn: "Support / Feedback",
+        modalTitle: "Support & Feedback",
+        modalDesc: "Need help or want to give feedback?",
+        modalInfo: `Send your feedback directly to <strong>Amethyst0407</strong> on Discord.<br>Any question, bug or improvement suggestion is welcome!`,
+        serverInfo: `<strong>GlitchCraft SMP - 18+ ONLY</strong><br><br>Bedrock exclusive server.<br>Must be 18 or older.`
+    },
+    pt: {
+        mc: "Jogar",
+        dc: "Comunidade",
+        msg: "Algo está errado com este mundo...",
+        supportBtn: "Suporte / Feedback",
+        modalTitle: "Suporte & Feedback",
+        modalDesc: "Precisa de ajuda ou quer dar sugestão?",
+        modalInfo: `Mande seu feedback diretamente para <strong>Amethyst0407</strong> no Discord.`,
+        serverInfo: `<strong>GlitchCraft SMP - 18+ SOMENTE</strong><br><br>Servidor exclusivo Bedrock.`
+    }
+};
+
+function applyLang() {
+    const t = texts[lang];
+
+    document.getElementById("mc").innerText = t.mc;
+    document.getElementById("dc").innerText = t.dc;
+    document.getElementById("msg").innerText = "";
+    document.getElementById("support-text").innerText = t.supportBtn;
+    document.getElementById("modal-title").innerHTML = t.modalTitle;
+    document.getElementById("modal-desc").innerHTML = t.modalDesc;
+    document.getElementById("modal-info").innerHTML = t.modalInfo;
+    document.getElementById("server-info").innerHTML = t.serverInfo;
+
+    typeEffect(t.msg);
+}
+
+function typeEffect(text) {
+    let i = 0;
+    const el = document.getElementById("msg");
+    el.innerHTML = "";
+
+    function typing() {
+        if (i < text.length) {
+            el.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, 35);
+        }
+    }
+    typing();
+}
+
+function toggleLang() {
+    lang = lang === "en" ? "pt" : "en";
+    applyLang();
+}
+
+function toggleSupport() {
+    const modal = document.getElementById("support-modal");
+    modal.style.display = modal.style.display === "flex" ? "none" : "flex";
+}
+
+window.onload = () => {
+    applyLang();
+};
+</script>
+</body>
+</html>ml>ElementById("msg").innerText = "";
+    document.getElementById("support-text").innerText = t.supportBtn;
+    document.getElementById("modal-title").innerHTML = t.modalTitle;
+    document.getElementById("modal-desc").innerHTML = t.modalDesc;
+    document.getElementById("modal-info").innerHTML = t.modalInfo;
+    document.getElementById("server-info").innerHTML = t.serverInfo;
+
+    typeEffect(t.msg);
+}
+
+/* alternar idioma */
+function toggleLang() {
+    lang = lang === "en" ? "pt" : "en";
+    applyLang();
+}
+
+/* init */
+window.onload = () => {
+    applyLang(); // sempre inicia em inglês
+};
+</script>
+</body>
+</html>
